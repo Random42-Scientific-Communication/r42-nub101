@@ -24,7 +24,7 @@ export default function Component(props) {
       />
 
       <main className="container">
-        <EntryHeader title="Faust Scaffold Blueprint" />
+        <EntryHeader title="Faust Scaffold" />
 
         <section className={style.cardGrid}>
           <Link
