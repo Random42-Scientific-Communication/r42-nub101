@@ -1,8 +1,17 @@
-import { gql } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import Link from "next/link";
 import style from "./header.module.css";
 
-export default function Header({ siteTitle, siteDescription, menuItems }) {
+export default function Header({ siteTitle, siteDescription, menuItems, secondaryMenu }) {
+  const {loading, error, data} = useQuery(GET_SUB_MENU, {
+    variables: { location: secondaryMenu },
+  });
+
+  if (loading) return "Loading...";
+  if (error) return "error";
+
+  const subMenuItems = data.menus.edges[0].node.menuItems.nodes;
+
   return (
     <header className={style.header}>
       <div className="container">
@@ -21,6 +30,15 @@ export default function Header({ siteTitle, siteDescription, menuItems }) {
           </ul>
         </nav>
       </div>
+      <div>
+        <ul className="flex mx-auto gap-8">
+          {subMenuItems.map((item) => (
+            <li key={item.id}>
+              <Link href={item.uri}>{item.label}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
     </header>
   );
 }
@@ -34,7 +52,7 @@ Header.fragments = {
       }
       primaryMenuItems: menuItems(where: { location: PRIMARY }) {
         nodes {
-          id
+          id  
           uri
           path
           label
@@ -50,3 +68,22 @@ Header.fragments = {
     }
   `,
 };
+
+const GET_SUB_MENU = gql`
+  query GetSubMenu($location: MenuLocationEnum) {
+    menus(where: { location: $location }) {
+      edges {
+        node {
+          name
+          menuItems {
+            nodes {
+              label
+              uri
+              id
+            }
+          }
+        }
+      }
+    }
+  }
+`;
