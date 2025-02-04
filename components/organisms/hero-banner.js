@@ -14,7 +14,6 @@ export const hero_query = gql`
     }
   }
 `;
-
 export const queryName = "hero";
 
 const HeroBanner = (props) => {

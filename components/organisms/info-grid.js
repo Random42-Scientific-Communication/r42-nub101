@@ -2,7 +2,7 @@ import { gql, useQuery } from "@apollo/client";
 import InfoItem from "../molecules/info-item";
 
 export const info_query = gql`
-  query Hero($id: ID!) {
+  query Infogrid($id: ID!) {
     page(id: $id, idType: DATABASE_ID) {
       components {
         components {
@@ -19,8 +19,7 @@ export const info_query = gql`
     }
   }
 `;
-
-export const queryName = "infogrid";
+export const queryName = "info-grid";
 
 const InfoGrid = (props) => {
   const title = props.infoTitle;
@@ -30,7 +29,7 @@ const InfoGrid = (props) => {
     <div>
       <h1>{title}</h1>
       {infoItems.map((infoItem, i) => (
-        <InfoItem title={infoItem.title} description={infoItem.description} />
+        <InfoItem key={i} title={infoItem.title} description={infoItem.description} />
       ))}
     </div>
   );
