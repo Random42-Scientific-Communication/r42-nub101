@@ -1,9 +1,8 @@
 import { gql, useQuery } from "@apollo/client";
-import Head from "next/head";
 import EntryHeader from "../components/entry-header";
-import Footer from "../components/footer";
-import Header from "../components/header";
-import GetParentSection from "../util/GetParentSection";
+import Footer from "../components/organisms/footer";
+import Header from "../components/organisms/header";
+import ComponentList from "../components/ComponentList";
 
 export default function Component(props) {
   // Loading state for previews
@@ -11,45 +10,29 @@ export default function Component(props) {
     return <>Loading...</>;
   }
 
-  const { title: siteTitle, description: siteDescription } =
-    props.data.generalSettings;
-  const menuItems = props.data.primaryMenuItems.nodes;
   const { title, content } = props.data.page;
 
-  const section = GetParentSection();
-
-  const {loading, error, data} = useQuery(GET_COMPONENTS, {
-    variables: { databaseId: props.__SEED_NODE__.databaseId }
+  const { loading: componentsLoading, error: componentsError, data: componentsData } = useQuery(GET_COMPONENTS, {
+    variables: { databaseId: props.__SEED_NODE__.databaseId },
   });
-  
-  if (loading) return "Loading...";
-  if (error) return "error";
-  
-  const componentList = data.page.components.components;
-  console.log(componentList);
+
+  if (componentsLoading) return "Loading components...";
+  if (componentsError) return "Error loading components";
+
+  const componentList = componentsData?.page?.components?.components || [];
 
   return (
     <>
-      <Head>
-        <title>{`${title} - ${siteTitle}`}</title>
-      </Head>
-
       <Header
-        siteTitle={siteTitle}
-        siteDescription={siteDescription}
-        menuItems={menuItems}
-        secondaryMenu={section}
+        generalSettings={props.data.generalSettings}
+        pageTitle={title}
+        menuItems={props.data.primaryMenuItems.nodes}
       />
 
       <main className="container">
         <EntryHeader title={title} />
         <div dangerouslySetInnerHTML={{ __html: content }} />
-        
-        {componentList && componentList.map((component, id) => (
-          <section key={id}>
-            <h1>{component.fieldGroupName}</h1>
-          </section>
-        ))}
+        <ComponentList components={componentList} pageId={props.__SEED_NODE__.databaseId} />
       </main>
 
       <Footer />

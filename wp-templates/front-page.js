@@ -1,14 +1,13 @@
 import { gql } from "@apollo/client";
 import Head from "next/head";
 import Link from "next/link";
-import Header from "../components/header";
+import Header from "../components/organisms/header";
 import EntryHeader from "../components/entry-header";
-import Footer from "../components/footer";
+import Footer from "../components/organisms/footer";
 import style from "../styles/front-page.module.css";
 
 export default function Component(props) {
-  const { title: siteTitle, description: siteDescription } =
-    props.data.generalSettings;
+  const { title: siteTitle, description: siteDescription } = props.data.generalSettings;
   const menuItems = props.data.primaryMenuItems.nodes;
 
   return (
@@ -18,9 +17,9 @@ export default function Component(props) {
       </Head>
 
       <Header
-        siteTitle={siteTitle}
-        siteDescription={siteDescription}
-        menuItems={menuItems}
+        generalSettings={props.data.generalSettings}
+        pageTitle={""}
+        menuItems={props.data.primaryMenuItems.nodes}
       />
 
       <main className="container">
