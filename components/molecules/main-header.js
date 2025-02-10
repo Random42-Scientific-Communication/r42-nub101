@@ -5,7 +5,7 @@ export const MainHeader = ({ menuItems }) => {
   return (
     <div className="flex flex-row items-center gap-2 px-10 bg-background opacity-90 backdrop-blur-sm h-header_main">
       <Link href="/" className="h-full max-w-[16rem]">
-        <Image src={"/static/svgs/nuvation-connect.svg"} alt="Nuvation Connect Logo" width={0} height={0} className="h-full w-full max-w-[16rem]" />      </Link>
+        <Image src={"/static/svgs/nuvation-connect.svg"} alt="Nuvation Connect Logo" width={0} height={0} className="h-full w-full max-w-[18rem]" />      </Link>
       <Navigation menuItems={menuItems} />
     </div>
   );

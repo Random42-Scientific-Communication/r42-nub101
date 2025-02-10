@@ -25,7 +25,7 @@ export default function Header({ generalSettings, pageTitle, menuItems }) {
       </Head>
     
       <header className="@container/header sticky top-0 w-full h-full">
-        <div className="z-10 flex flex-col-reverse w-full h-full border-b lg:flex-col shrink-0 backdrop-blur-sm">
+        <div className="z-10 flex w-full h-full border-b lg:flex-col backdrop-blur-sm">
           <BannerHeader menuItems={menuItems} />
           <MainHeader menuItems={subMenuItems} />
         </div>
@@ -79,38 +79,3 @@ const GET_SUB_MENU = gql`
   }
 `;
 
-
-
-
-
-
-// import { navigation } from '@/data/navigation';
-// import { useParams, usePathname } from 'next/navigation';
-// import { BannerHeader } from './banner-header';
-// import { MainHeader } from './main-header';
-
-// const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
-//   const params = useParams();
-//   const pathname = usePathname();
-//   const { section, sub_section } = params;
-
-//   const sectionData = navigation.find(
-//     (sectionData) => sectionData.slug === section
-//   );
-
-//   // If we're on the home page, don't show the header
-//   if (pathname === '/') {
-//     return null;
-//   }
-
-//   return (
-//     <header className="@container/header sticky top-0 w-full h-full">
-//       <div className="z-10 flex flex-col-reverse w-full h-full border-b lg:flex-col shrink-0 backdrop-blur-sm">
-//         <BannerHeader />
-//         <MainHeader section={sectionData} activeSlug={sub_section} />
-//       </div>
-//     </header>
-//   );
-// };
-
-// export { Header };
