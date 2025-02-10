@@ -1,4 +1,6 @@
+import FullWidthImage, { full_width_image_query } from '../components/molecules/full-width-image';
 import HeroBanner, { hero_query } from '../components/organisms/hero-banner';
+import InfoBanner, { info_banner_query } from '../components/organisms/info-banner';
 import InfoGrid, { info_query } from '../components/organisms/info-grid';
 import ResponsiveTabs, { responsive_tabs_query } from '../components/organisms/responsive-tabs';
 import ScrollList, { scroll_list_query } from '../components/organisms/scroll-list';
@@ -24,6 +26,14 @@ const ComponentMapping = {
   ComponentsComponentsResponsiveTabsLayout: {
     component: ResponsiveTabs,
     query: responsive_tabs_query,
+  },
+  ComponentsComponentsFullWidthImageLayout: {
+    component: FullWidthImage,
+    query: full_width_image_query,
+  },
+  ComponentsComponentsInfoBannerLayout: {
+    component: InfoBanner,
+    query: info_banner_query
   }
 };
 

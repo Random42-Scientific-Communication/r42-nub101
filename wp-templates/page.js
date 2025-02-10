@@ -21,6 +21,8 @@ export default function Component(props) {
 
   const componentList = componentsData?.page?.components?.components || [];
 
+  // console.log(componentList);
+
   return (
     <>
       <Header
