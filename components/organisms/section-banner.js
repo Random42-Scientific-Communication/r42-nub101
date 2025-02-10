@@ -16,11 +16,12 @@ export const section_banner_query = gql`
 export const queryName = "sectionbanner";
 
 const SectionBanner = (props) => {
-  console.log(props);
+  const description = props.description;
   
   return (
     <div>
-      <h1>Section Banner</h1>
+      <pre className="underline">Section Banner</pre>
+      <p>{description}</p>
     </div>
   );
 };

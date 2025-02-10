@@ -1,28 +1,269 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import '../styles/scrollbar.css';
+@import '../styles/fonts/Plus_Jakarta_Sans.css';
 
-html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+  font-family: 'Plus Jakarta Sans';
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+html {
+  scroll-behavior: smooth;
+  font-size: calc(var(--base-font-size) * 0.75);
+
+  @media (min-width: 640px) {
+    font-size: calc(var(--base-font-size) * 0.875);
+  }
+  @media (min-width: 768px) {
+    font-size: var(--base-font-size);
+  }
+  @media (min-width: 1024px) {
+    font-size: calc(var(--base-font-size) * 1.125);
+  }
+  @media (min-width: 1280px) {
+    font-size: calc(var(--base-font-size) * 1.25);
+  }
+  @media (min-width: 1536px) {
+    font-size: calc(var(--base-font-size) * 1.333);
+  }
 }
 
-* {
-  box-sizing: border-box;
+@layer base {
+  :root {
+    --base-font-size: 16px;
+    --base-line-height: 1.5;
+    --base-letter-spacing: 0px;
+    --base-font-weight: 400;
+
+    --header-prelim-height: 3rem;
+    --header-main-height: 3.5rem;
+    --header-height: calc(
+      var(--header-prelim-height) + var(--header-main-height)
+    );
+    --inner-height: calc(100dvh - var(--header-height));
+
+    --color-deep-teal: 189 75% 16%; /* Dark teal/blue #0A4149 */
+    --color-deep-teal-lighter: 189 75% 26%; /* Lighter Dark teal/blue #0A4149 */
+
+    --color-bright-cyan: 189 75% 49%; /* Vibrant cyan/turquoise #1FC8E3 */
+    --color-navy: 231 38% 41%; /* Medium navy blue #4A5686 */
+    --color-lavender: 228 45% 80%; /* Soft lavender blue #B8C1E8 */
+    --color-lime: 71 65% 57%; /* Bright lime green #AAC22E */
+    --color-ghost: 285 25% 92%; /* Pale lavender/ghost white #EAE6EF */
+    --color-seafoam: 175 36% 72%; /* Soft seafoam green #8FC3B9 */
+    --color-ice: 190 57% 91%; /* Light ice blue #D9F2F6 */
+    --color-snow: 180 6% 98%; /* Off-white/snow #F9FAFA */
+
+    --color-deep-blue: 230 38% 42%; /* Deep Blue #425092 */
+    --color-white: 0 0% 100%; /* White #FFFFFF */
+    --color-smoke-grey: 180 9% 98%; /* Smoke Grey  */
+
+    --color-white: 0 0% 100%; /* White #FFFFFF */
+
+    /* Base colors */
+    --background: var(--color-snow);
+    --foreground: var(--color-deep-teal);
+
+    --background-lighter: var(--color-white);
+    --foreground-lighter: var(--color-deep-teal-lighter);
+
+    /* Card colors */
+    --card: var(--color-ghost);
+    --card-foreground: var(--color-deep-teal);
+
+    /* Popover colors */
+    --popover: var(--color-ghost);
+    --popover-foreground: var(--color-deep-teal);
+
+    /* Primary colors */
+    --primary: var(--color-bright-cyan);
+    --primary-foreground: var(--color-snow);
+
+    /* Secondary colors */
+    --secondary: var(--color-navy);
+    --secondary-foreground: var(--color-lavender);
+
+    --tertiary-foreground: var(--color-white);
+    --tertiary: var(--color-deep-blue);
+
+    /* Muted colors */
+    --muted: var(--color-ice);
+    --muted-foreground: var(--color-navy);
+
+    /* Accent colors */
+    --accent: var(--color-seafoam);
+    --accent-foreground: var(--color-deep-teal);
+
+    /* Other UI elements */
+    --destructive: var(--color-lime);
+    --destructive-foreground: var(--color-snow);
+    --border: var(--color-ice);
+    --input: var(--color-ice);
+    --ring: var(--color-bright-cyan);
+
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    --sidebar-background: var(--color-snow);
+    --sidebar-foreground: var(--color-deep-teal);
+    --sidebar-primary: var(--color-bright-cyan);
+    --sidebar-primary-foreground: var(--color-snow);
+    --sidebar-accent: var(--color-ice);
+    --sidebar-accent-foreground: var(--color-deep-teal);
+    --sidebar-border: var(--color-ice);
+    --sidebar-ring: var(--color-bright-cyan);
+  }
+  .dark {
+    /* Base colors */
+    --background: var(--color-deep-teal);
+    --foreground: var(--color-snow);
+
+    --foreground-lighter: var(--color-white);
+    --background-lighter: var(--color-deep-teal-lighter);
+
+    /* Card colors */
+    --card: var(--color-navy);
+    --card-foreground: var(--color-snow);
+
+    /* Popover colors */
+    --popover: var(--color-navy);
+    --popover-foreground: var(--color-snow);
+
+    /* Primary colors */
+    --primary: var(--color-bright-cyan);
+    --primary-foreground: var(--color-deep-teal);
+
+    /* Secondary colors */
+    --secondary: var(--color-lavender);
+    --secondary-foreground: var(--color-navy);
+
+    --tertiary: var(--color-deep-blue);
+    --tertiary-foreground: var(--color-white);
+
+    /* Muted colors */
+    --muted: var(--color-seafoam);
+    --muted-foreground: var(--color-deep-teal);
+
+    /* Accent colors */
+    --accent: var(--color-ice);
+    --accent-foreground: var(--color-deep-teal);
+
+    /* Other UI elements */
+    --destructive: var(--color-lime);
+    --destructive-foreground: var(--color-deep-teal);
+    --border: var(--color-navy);
+    --input: var(--color-navy);
+    --ring: var(--color-bright-cyan);
+
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    --sidebar-background: var(--color-deep-teal);
+    --sidebar-foreground: var(--color-snow);
+    --sidebar-primary: var(--color-bright-cyan);
+    --sidebar-primary-foreground: var(--color-deep-teal);
+    --sidebar-accent: var(--color-navy);
+    --sidebar-accent-foreground: var(--color-snow);
+    --sidebar-border: var(--color-navy);
+    --sidebar-ring: var(--color-bright-cyan);
+  }
+
+  ::selection {
+    background-color: hsl(var(--destructive) / 0.3);
+    color: hsl(var(--destructive));
+  }
+
+  ::-moz-selection {
+    background-color: hsl(var(--destructive) / 0.3);
+    color: hsl(var(--destructive));
+  }
 }
 
-#__next {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground text-base;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    padding: 0;
+    margin: 0;
+  }
+
+  h1 {
+    @apply text-foreground  text-5xl;
+  }
+
+  h2 {
+    @apply text-foreground  text-4xl;
+  }
+
+  h3 {
+    @apply text-foreground  text-3xl;
+  }
+
+  h4 {
+    @apply text-foreground  text-2xl;
+  }
+
+  h5 {
+    @apply text-foreground   text-xl;
+  }
+
+  h6 {
+    @apply text-foreground   text-lg;
+  }
+}
+
+@keyframes highlight {
+  0% {
+    background-color: hsl(var(--primary) / 0.2);
+  }
+  100% {
+    background-color: transparent;
+  }
+}
+
+::target {
+  animation: highlight 10s ease-out;
+  scroll-margin-top: 100px; /* Adds some space at the top when scrolling to the element */
+}
+
+@layer components {
+  .gradient-fade {
+    background: linear-gradient(
+      to bottom,
+      hsl(var(--background-lighter)) 0%,
+      hsl(var(--card)) 20%,
+      /* hsl(var(--secondary-foreground)) 40%,
+      hsl(var(--primary)) 60%,
+      hsl(var(--accent)) 62%, */
+        hsl(var(--muted)) 65%,
+      hsl(var(--background-lighter)) 90%
+    );
+
+    mask-image: linear-gradient(
+      to right,
+      black 0%,
+      black 70%,
+      transparent 100%
+    );
+  }
 }
 
 .container {

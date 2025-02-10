@@ -1,8 +1,9 @@
 import { gql, useQuery } from "@apollo/client";
 import Head from "next/head";
 import Link from "next/link";
-import style from "./header.module.css";
 import GetParentSection from "../../util/GetParentSection";
+import { BannerHeader } from "../molecules/banner-header";
+import { MainHeader } from "../molecules/main-header";
 
 export default function Header({ generalSettings, pageTitle, menuItems }) {
   const section = GetParentSection();
@@ -23,31 +24,10 @@ export default function Header({ generalSettings, pageTitle, menuItems }) {
         <title>{`${pageTitle} - ${siteTitle}`}</title>
       </Head>
     
-      <header className={style.header}>
-        <div className="container">
-          <Link href="/" className={style.brand}>
-            <h2 className={style.siteTitle}>{siteTitle}</h2>
-            <p className={style.siteDescription}>{siteDescription}</p>
-          </Link>
-
-          <nav className={style.nav}>
-            <ul>
-              {menuItems.map((item) => (
-                <li key={item.id}>
-                  <Link href={item.uri}>{item.label}</Link>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        </div>
-        <div>
-          <ul className="flex mx-auto gap-8">
-            {subMenuItems.map((item) => (
-              <li key={item.id}>
-                <Link href={item.uri}>{item.label}</Link>
-              </li>
-            ))}
-          </ul>
+      <header className="@container/header sticky top-0 w-full h-full">
+        <div className="z-10 flex flex-col-reverse w-full h-full border-b lg:flex-col shrink-0 backdrop-blur-sm">
+          <BannerHeader menuItems={menuItems} />
+          <MainHeader menuItems={subMenuItems} />
         </div>
       </header>
     </>
@@ -98,3 +78,39 @@ const GET_SUB_MENU = gql`
     }
   }
 `;
+
+
+
+
+
+
+// import { navigation } from '@/data/navigation';
+// import { useParams, usePathname } from 'next/navigation';
+// import { BannerHeader } from './banner-header';
+// import { MainHeader } from './main-header';
+
+// const Header = (props: React.HTMLAttributes<HTMLDivElement>) => {
+//   const params = useParams();
+//   const pathname = usePathname();
+//   const { section, sub_section } = params;
+
+//   const sectionData = navigation.find(
+//     (sectionData) => sectionData.slug === section
+//   );
+
+//   // If we're on the home page, don't show the header
+//   if (pathname === '/') {
+//     return null;
+//   }
+
+//   return (
+//     <header className="@container/header sticky top-0 w-full h-full">
+//       <div className="z-10 flex flex-col-reverse w-full h-full border-b lg:flex-col shrink-0 backdrop-blur-sm">
+//         <BannerHeader />
+//         <MainHeader section={sectionData} activeSlug={sub_section} />
+//       </div>
+//     </header>
+//   );
+// };
+
+// export { Header };

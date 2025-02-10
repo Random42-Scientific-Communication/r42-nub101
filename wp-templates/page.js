@@ -30,8 +30,6 @@ export default function Component(props) {
       />
 
       <main className="container">
-        <EntryHeader title={title} />
-        <div dangerouslySetInnerHTML={{ __html: content }} />
         <ComponentList components={componentList} pageId={props.__SEED_NODE__.databaseId} />
       </main>
 

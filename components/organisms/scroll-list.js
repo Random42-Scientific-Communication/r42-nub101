@@ -27,10 +27,10 @@ export const queryName = "scroll-list";
 const ScrollList = (props) => {
   const heading = props.heading;
   const steps = props.steps;
-  console.log(props);
 
   return (
     <div>
+      <pre className="underline">ScrollList</pre>
       <h1>Getting started is easy.</h1>
       <h2>{heading}</h2>
       {steps.map((step, i) => (

@@ -27,6 +27,7 @@ const InfoGrid = (props) => {
   
   return (
     <div>
+      <pre className="underline">InfoGrid</pre>
       <h1>{title}</h1>
       {infoItems.map((infoItem, i) => (
         <InfoItem key={i} title={infoItem.title} description={infoItem.description} />

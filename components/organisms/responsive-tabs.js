@@ -7,6 +7,14 @@ export const responsive_tabs_query = gql`
         components {
           ... on ComponentsComponentsResponsiveTabsLayout {
             heading
+            tabs {
+              tabContent
+              tabName
+              button {
+                title
+                url
+              }
+            }
           }
         }
       }
@@ -16,11 +24,17 @@ export const responsive_tabs_query = gql`
 export const queryName = "responsive-tabs";
 
 const ResponsiveTabs = (props) => {
-  console.log(props);
-  
+  const tabItems = props.tabs;  
+
   return (
     <div>
-      <h1>Responsive Tabs</h1>
+      <pre className="underline">Responsive Tabs</pre>
+      {tabItems.map((tab, i) => {
+        const tabContent = tab.tabContent;
+        return (
+          <div key={i} dangerouslySetInnerHTML={{__html: tabContent}}></div>
+        );
+      })}
     </div>
   );
 };
